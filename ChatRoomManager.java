@@ -18,6 +18,11 @@ public class ChatRoomManager {
         return roomId;
     }
 
+    //채팅방 삭제
+    public synchronized void removeChatRoom(int roomId) {
+        chatRooms.remove(roomId);
+    }
+
     //채팅방 번호로 채팅방 객체 가져오기
     public synchronized ChatRoom getChatRoom(int roomId) {
         return chatRooms.get(roomId);

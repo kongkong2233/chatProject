@@ -4,11 +4,13 @@ import java.util.Map;
 
 public class ChatRoom {
     private Map<String, PrintWriter> clients; //채팅방에 참여한 클라이언트 목록
-    private String roomId; //채팅방 식별 번호
+    private int roomId; //채팅방 식별 번호
+    private int userCount; //유저 수 확인용
 
     public ChatRoom() {
         this.roomId = roomId;
         this.clients = new HashMap<>();
+        this.userCount = 0;
     }
 
     //메시지 전송(모두에게)
@@ -31,9 +33,27 @@ public class ChatRoom {
     //클라이언트 추가 및 제거
     public synchronized void addClient(String clientId, PrintWriter writer) {
         clients.put(clientId, writer);
+        incrementUserCount();
     }
 
     public synchronized void removeClient(String clientId) {
         clients.remove(clientId);
+    }
+
+    //사용자 수 관련 메소드
+    public synchronized void incrementUserCount() {
+        userCount++;
+    }
+
+    public synchronized void decrementUserCount() {
+        userCount--;
+    }
+
+    public synchronized int getUserCount() {
+        return userCount;
+    }
+
+    public synchronized int getRoomId() {
+        return roomId;
     }
 }

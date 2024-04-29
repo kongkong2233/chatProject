@@ -130,6 +130,11 @@ class ChatThread extends Thread {
                 if (room != null) {
                     room.removeClient(id);
                     out.println("방에서 퇴장하였습니다.");
+                    room.decrementUserCount();
+                    if (room.getUserCount() == 0) {
+                        roomManager.removeChatRoom(room.getRoomId() + 1);
+                        System.out.println(room.getRoomId() + 1 + "번 방이 삭제되었습니다.");
+                    }
                     room = null;
                 } else {
                     out.println("현재 방에 입장해 있지 않습니다.");
