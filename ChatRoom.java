@@ -4,13 +4,15 @@ import java.util.Map;
 
 public class ChatRoom {
     private Map<String, PrintWriter> clients; //채팅방에 참여한 클라이언트 목록
-    private int roomId; //채팅방 식별 번호
     private int userCount; //유저 수 확인용
+    private int roomId;
+    private ChatRoomManager roomManager;
 
-    public ChatRoom() {
-        this.roomId = roomId;
+    public ChatRoom(int roomId, ChatRoomManager roomManager) {
         this.clients = new HashMap<>();
         this.userCount = 0;
+        this.roomId = roomId;
+        this.roomManager = roomManager;
     }
 
     //메시지 전송(모두에게)

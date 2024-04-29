@@ -13,7 +13,7 @@ public class ChatRoomManager {
     //채팅방 생성
     public synchronized int createChatRoom() {
         int roomId = nextRoomId++;
-        ChatRoom room = new ChatRoom();
+        ChatRoom room = new ChatRoom(roomId, this);
         chatRooms.put(roomId, room);
         return roomId;
     }
@@ -37,5 +37,9 @@ public class ChatRoomManager {
             builder.append("방 번호: ").append(roomId);
         }
         return builder.toString();
+    }
+
+    public synchronized int getNextRoomId() {
+        return nextRoomId;
     }
 }
